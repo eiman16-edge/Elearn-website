@@ -90,7 +90,7 @@ function Header() {
   }, [open]);
   return <motion.header initial={{ y: -18, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: .5, ease: 'easeOut' }} className={`z-40 border-b border-white/10 text-white ${homeHeader ? 'absolute inset-x-0 top-0 bg-transparent' : 'relative bg-[#10292b]'}`}>
     <div className="container-page flex h-[78px] items-center justify-between">
-      <AppLink href="/" aria-label="Elearn home" className="inline-flex shrink-0 items-center"><img src="/elearn-logo.png" alt="Elearn" className="h-9 w-auto object-contain" /></AppLink>
+      <AppLink href="/" aria-label="Elearn home" className="inline-flex shrink-0 items-center"><img src={`${import.meta.env.BASE_URL}elearn-logo.png`} alt="Elearn" className="h-9 w-auto object-contain" /></AppLink>
       <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
         {links.map(([label, href]) => <MotionLink key={label} to={href} whileHover={{ y: -1 }} transition={hoverTransition} className={`relative text-sm font-semibold transition hover:text-brand ${isActive(href) ? 'text-brand' : 'text-white/90'}`}>{label}{isActive(href) && <motion.span layoutId="nav-active" transition={{ type: 'spring', stiffness: 240, damping: 30 }} className="absolute inset-x-0 -bottom-2 mx-auto h-0.5 w-4 rounded-full bg-accent" />}</MotionLink>)}
       </nav>
@@ -376,5 +376,5 @@ function RoutedApp() {
 }
 
 export default function App() {
-  return <BrowserRouter><RoutedApp /></BrowserRouter>;
+  return <BrowserRouter basename={import.meta.env.BASE_URL}><RoutedApp /></BrowserRouter>;
 }
